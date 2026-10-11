@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="topbar">
+      <div>
+        <p class="eyebrow">Matching engine</p>
+        <h1>Recommended opportunities</h1>
+      </div>
+      <span class="badge badge-gold">Match Score = Material Compatibility + Quantity Fit + Distance Fit + Quality Fit + Buyer Demand</span>
+    </div>
+
+    {% for item in matches %}
+    <div class="match-card">
+      <div class="topbar">
+        <div>
+          <h3>{{ item.listing.material_name }}</h3>
+          <p>{{ item.listing.village }}, {{ item.listing.district }}</p>
+        </div>
+        <div class="score-pill">{{ item.score }}/100</div>
+      </div>
+      <p><strong>Estimated net earnings:</strong> ₹{{ item.net_earnings }}</p>
+      <ul>
+        {% for reason in item.reasons %}
+          <li>{{ reason }}</li>
+        {% endfor %}
+      </ul>
+      <a class="btn btn-primary" href="{{ url_for('listing_detail', id=item.listing.id) }}">Open listing</a>
+    </div>
+    {% else %}
+    <div class="card"><p>No suitable matches available yet.</p></div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

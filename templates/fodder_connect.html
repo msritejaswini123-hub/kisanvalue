@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="topbar">
+      <div>
+        <p class="eyebrow">FodderConnect</p>
+        <h1>Livestock feed and by-product matching</h1>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Potential feed materials</h3>
+        {% for item in feed_materials %}
+          <p>{{ item.material_name }} — {{ item.quantity }} {{ item.unit }}</p>
+        {% else %}
+          <p>No feed materials are posted yet.</p>
+        {% endfor %}
+      </div>
+      <div class="card">
+        <h3>Buyer requirements</h3>
+        {% for req in requirements %}
+          <p>{{ req.material }} — {{ req.quantity }} — {{ req.quality_requirements }}</p>
+        {% else %}
+          <p>No dairy or feed material requirements yet.</p>
+        {% endfor %}
+      </div>
+      <div class="card">
+        <h3>Safety notice</h3>
+        <p>Not every crop residue is safe or nutritious for livestock. Potential feed materials must be assessed for mould, contamination and vet or nutrition guidance where suitability is uncertain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

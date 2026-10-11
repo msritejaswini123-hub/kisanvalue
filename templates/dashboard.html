@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="topbar">
+      <div>
+        <p class="eyebrow">Welcome</p>
+        <h1>{{ title }}</h1>
+      </div>
+      <div>
+        <span class="badge badge-green">{{ user.role }}</span>
+      </div>
+    </div>
+
+    <div class="stats-strip">
+      <div class="metric-box"><strong>{{ listings|length if listings else 0 }}</strong><span>My residue listings</span></div>
+      <div class="metric-box"><strong>{{ orders|length if orders else 0 }}</strong><span>Active orders</span></div>
+      <div class="metric-box"><strong>{{ enquiries|length if enquiries else 0 }}</strong><span>Buyer enquiries</span></div>
+      <div class="metric-box"><strong>{{ notifications|length if notifications else 0 }}</strong><span>Notifications</span></div>
+    </div>
+
+    {% if user.role == 'farmer' %}
+      <div class="grid-3" style="margin-top: 28px;">
+        <div class="card">
+          <h3>Residue listings</h3>
+          {% if listings %}
+            <ul>
+              {% for item in listings %}
+                <li><a href="{{ url_for('listing_detail', id=item.id) }}">{{ item.material_name }} - {{ item.quantity }} {{ item.unit }}</a></li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>No listings yet. Create your first residue listing.</p>
+          {% endif %}
+          <a class="btn btn-primary" href="{{ url_for('create_listing') }}">Create listing</a>
+        </div>
+        <div class="card">
+          <h3>Offers and enquiries</h3>
+          {% if orders %}
+            <ul>
+              {% for order in orders %}
+                <li>Order #{{ order.id }} — ₹{{ order.agreed_price }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>New enquiries will appear here.</p>
+          {% endif %}
+        </div>
+        <div class="card">
+          <h3>Notifications</h3>
+          {% if notifications %}
+            <ul>
+              {% for n in notifications %}
+                <li>{{ n.message }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>System notifications will appear here.</p>
+          {% endif %}
+        </div>
+      </div>
+    {% elif user.role == 'buyer' %}
+      <div class="grid-3" style="margin-top: 28px;">
+        <div class="card">
+          <h3>Saved requirements</h3>
+          {% if enquiries %}
+            <ul>{% for item in enquiries %}<li>{{ item.material }} — {{ item.quantity }}</li>{% endfor %}</ul>
+          {% else %}
+            <p>No requirements yet.</p>
+          {% endif %}
+          <a class="btn btn-primary" href="{{ url_for('buyer_requirements') }}">Add requirement</a>
+        </div>
+        <div class="card">
+          <h3>Offers</h3>
+          {% if offers %}
+            <ul>{% for item in offers %}<li>Offer ₹{{ item.offer_price }} for listing #{{ item.listing_id }}</li>{% endfor %}</ul>
+          {% else %}
+            <p>No offers yet.</p>
+          {% endif %}
+        </div>
+        <div class="card">
+          <h3>Orders</h3>
+          <p>Track delivery milestones, collection schedules and transaction status.</p>
+          <a class="btn btn-secondary" href="{{ url_for('orders') }}">View orders</a>
+        </div>
+      </div>
+    {% else %}
+      <div class="card" style="margin-top: 28px;">
+        <h3>Operations</h3>
+        <p>Manage equipment availability, bookings and maintenance status from this dashboard.</p>
+        {% if listings %}
+          <ul>{% for item in listings %}<li>{{ item.equipment_type }} — {{ item.location }}</li>{% endfor %}</ul>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

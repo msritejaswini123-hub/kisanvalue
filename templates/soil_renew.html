@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1>SoilRenew</h1>
+    <p class="section-subtitle">Biochar and compost marketplace with sample demo data.</p>
+    <div class="card" style="margin-bottom: 28px;">
+      <h3>List a soil amendment</h3>
+      <form method="post">
+        <input type="hidden" name="_csrf" value="{{ session['csrf_token'] }}" />
+        <div class="form-grid">
+          <label>Product type<select name="product_type"><option>Compost</option><option>Biochar</option><option>Vermicompost</option></select></label>
+          <label>Product name<input type="text" name="product_name" required /></label>
+          <label>Quantity<input type="text" name="quantity" required /></label>
+          <label>Unit<input type="text" name="unit" value="kg" /></label>
+          <label>Price per unit<input type="number" name="price_per_unit" required /></label>
+          <label>Production method<input type="text" name="production_method" /></label>
+          <label>Source material<input type="text" name="source_material" /></label>
+          <label>Delivery option<input type="text" name="delivery_option" /></label>
+        </div>
+        <label>Quality documentation<textarea name="quality_documentation">Field record and sample assurance notes.</textarea></label>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Publish product</button></div>
+      </form>
+    </div>
+
+    <div class="grid-3">
+      {% for product in products %}
+      <div class="card">
+        <h3>{{ product.product_name }}</h3>
+        <p>{{ product.product_type }}</p>
+        <p>Available: {{ product.quantity }} {{ product.unit }}</p>
+        <p>Price: ₹{{ product.price_per_unit }} / unit</p>
+        <p>Method: {{ product.production_method }}</p>
+      </div>
+      {% else %}
+      <div class="card"><p>No soil products are listed yet.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

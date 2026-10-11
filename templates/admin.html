@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="topbar">
+      <div>
+        <p class="eyebrow">Administration</p>
+        <h1>Admin Dashboard</h1>
+      </div>
+      <span class="badge badge-red">Secure access</span>
+    </div>
+
+    <div class="stats-strip">
+      <div class="metric-box"><strong>{{ user_count if user_count is defined else 0 }}</strong><span>Registered users</span></div>
+      <div class="metric-box"><strong>{{ listing_count if listing_count is defined else 0 }}</strong><span>Listings monitored</span></div>
+      <div class="metric-box"><strong>{{ verification|length if verification else 0 }}</strong><span>Verification requests</span></div>
+      <div class="metric-box"><strong>{{ complaints|length if complaints else 0 }}</strong><span>Complaints</span></div>
+    </div>
+
+    <div class="grid-3" style="margin-top: 28px;">
+      <div class="card">
+        <h3>Registered users</h3>
+        {% if users %}
+        <ul>{% for user in users %}<li>{{ user.full_name }} — {{ user.role }}</li>{% endfor %}</ul>
+        {% else %}
+        <p>No users found.</p>
+        {% endif %}
+      </div>
+      <div class="card">
+        <h3>Verification requests</h3>
+        {% if verification %}
+        <ul>{% for req in verification %}<li>{{ req.category }} — {{ req.status }}</li>{% endfor %}</ul>
+        {% else %}
+        <p>No verification requests.</p>
+        {% endif %}
+      </div>
+      <div class="card">
+        <h3>Complaints</h3>
+        {% if complaints %}
+        <ul>{% for item in complaints %}<li>{{ item.subject }} — {{ item.status }}</li>{% endfor %}</ul>
+        {% else %}
+        <p>No complaints logged.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

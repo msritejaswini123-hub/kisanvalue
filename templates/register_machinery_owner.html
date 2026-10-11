@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="form-card">
+      <h2>Register as Machinery Owner</h2>
+      <form method="post">
+        <input type="hidden" name="_csrf" value="{{ session['csrf_token'] }}" />
+        <div class="form-grid">
+          <label>Full name<input type="text" name="full_name" required /></label>
+          <label>Email<input type="email" name="email" required /></label>
+          <label>Mobile number<input type="tel" name="mobile" required /></label>
+          <label>Password<input type="password" name="password" required /></label>
+          <label>Location<input type="text" name="location" required /></label>
+          <label>Equipment type<select name="equipment_type"><option>Tractor</option><option>Baler</option><option>Straw chopper</option><option>Harvester</option><option>Shredder</option><option>Composting equipment</option><option>Biochar production equipment</option><option>Transport vehicle</option></select></label>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Create account</button>
+          <a class="btn btn-light" href="{{ url_for('login') }}">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

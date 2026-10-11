@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1>FarmShare</h1>
+    <p class="section-subtitle">Machinery-sharing marketplace for tractors, balers, shredders and more.</p>
+    <div class="card" style="margin-bottom: 24px;">
+      <h3>List equipment</h3>
+      <form method="post">
+        <input type="hidden" name="_csrf" value="{{ session['csrf_token'] }}" />
+        <div class="form-grid">
+          <label>Equipment type<select name="equipment_type"><option>Tractor</option><option>Baler</option><option>Straw chopper</option><option>Harvester</option><option>Shredder</option><option>Composting equipment</option><option>Biochar production equipment</option><option>Transport vehicle</option></select></label>
+          <label>Location<input type="text" name="location" required /></label>
+          <label>Service radius<input type="text" name="service_radius" /></label>
+          <label>Hourly rate<input type="number" name="hourly_rate" /></label>
+          <label>Daily rate<input type="number" name="daily_rate" /></label>
+          <label>Availability<input type="text" name="availability" /></label>
+          <label>Operator availability<input type="text" name="operator_availability" /></label>
+          <label>Fuel details<input type="text" name="fuel_details" /></label>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Add listing</button></div>
+      </form>
+    </div>
+
+    <div class="grid-3">
+      {% for item in listings %}
+      <div class="card">
+        <h3>{{ item.equipment_type }}</h3>
+        <p>Location: {{ item.location }}</p>
+        <p>Service radius: {{ item.service_radius }}</p>
+        <p>Rates: ₹{{ item.hourly_rate }}/hr, ₹{{ item.daily_rate }}/day</p>
+        <p>Status: {{ item.status }}</p>
+      </div>
+      {% else %}
+      <div class="card"><p>No equipment is currently listed.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

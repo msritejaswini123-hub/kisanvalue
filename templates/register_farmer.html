@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="form-card">
+      <h2>Register as Farmer</h2>
+      <form method="post">
+        <input type="hidden" name="_csrf" value="{{ session['csrf_token'] }}" />
+        <div class="form-grid">
+          <label>Full name<input type="text" name="full_name" required /></label>
+          <label>Mobile number<input type="tel" name="mobile" required /></label>
+          <label>Email (optional)<input type="email" name="email" required /></label>
+          <label>Password<input type="password" name="password" required /></label>
+          <label>Village<input type="text" name="village" required /></label>
+          <label>District<input type="text" name="district" required /></label>
+          <label>State<input type="text" name="state" required /></label>
+          <label>PIN code<input type="text" name="pin_code" required /></label>
+          <label>Land area (acres)<input type="text" name="land_area" /></label>
+          <label>Main crops grown<input type="text" name="main_crops" required /></label>
+          <label>Preferred language<select name="language"><option>English</option><option>Hindi</option><option>Telugu</option></select></label>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Register</button>
+          <a class="btn btn-light" href="{{ url_for('login') }}">Already have an account?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

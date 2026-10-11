@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1>Impact dashboard</h1>
+    <p class="section-subtitle">Demo-data label is visible. Listed quantities and sold quantities are tracked separately.</p>
+    <div class="stats-strip">
+      <div class="metric-box"><strong>{{ metrics.listed }}</strong><span>Residue listed</span></div>
+      <div class="metric-box"><strong>{{ metrics.sold }}</strong><span>Confirmed reuse / sold</span></div>
+      <div class="metric-box"><strong>{{ metrics.farmers }}</strong><span>Farmers participating</span></div>
+      <div class="metric-box"><strong>{{ metrics.buyers }}</strong><span>Registered buyers</span></div>
+    </div>
+    <div class="grid-3" style="margin-top: 28px;">
+      <div class="card"><strong>{{ metrics.complete_transactions }}</strong><p>Completed residue transactions</p></div>
+      <div class="card"><strong>₹{{ metrics.earnings }}</strong><p>Estimated earnings from completed sales</p></div>
+      <div class="card"><strong>Demo</strong><p>Other metrics remain sample/demo only until live activity is recorded.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

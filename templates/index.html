@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Circular agriculture platform</p>
+      <h1>Your Farm Waste Is Someone’s Valuable Resource.</h1>
+      <p>KisanValue connects farmers with industries, bioenergy plants, livestock-feed suppliers, compost producers, and machinery providers to turn agricultural by-products into income and sustainable farming opportunities.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('register_farmer') }}">Join as Farmer</a>
+        <a class="btn btn-secondary" href="{{ url_for('register_buyer') }}">Register as Buyer</a>
+        <a class="btn btn-light" href="{{ url_for('marketplace') }}">Explore Opportunities</a>
+        <a class="btn btn-light" href="{{ url_for('farm_share') }}">Rent Machinery</a>
+      </div>
+      <div class="workflow">
+        <div class="workflow-item"><span>Farmer Lists Residue</span> <strong>→</strong></div>
+        <div class="workflow-item"><span>KisanValue Finds Suitable Uses</span> <strong>→</strong></div>
+        <div class="workflow-item"><span>Buyers Connect</span> <strong>→</strong></div>
+        <div class="workflow-item"><span>Material Is Delivered</span> <strong>→</strong></div>
+        <div class="workflow-item"><span>Farmer Earns</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Marketplace preview</h3>
+      <div class="metric-box">
+        <strong>1,000 kg</strong>
+        <span>Rice straw listed in Nizamabad</span>
+      </div>
+      <div class="stats-strip">
+        <div class="metric-box"><strong>24</strong><span>Material matches</span></div>
+        <div class="metric-box"><strong>8</strong><span>Buyer categories</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Agricultural residue marketplace</h2>
+    <p class="section-subtitle">Search suitable across biomass, compost, dairy feed and machinery categories.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Residue market</h3>
+        <p>List rice straw, husk, maize residues, bagasse and other crop by-products.</p>
+      </div>
+      <div class="card">
+        <h3>Buyer categories</h3>
+        <p>Bioenergy plants, paper processors, dairy-feed suppliers, compost makers and more.</p>
+      </div>
+      <div class="card">
+        <h3>Machinery rental</h3>
+        <p>Access balers, tractors, shredders and transport support from nearby owners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: #f1f8f3;">
+  <div class="container">
+    <h2 class="section-title">Impact dashboard</h2>
+    <p class="section-subtitle">Demo data label: values shown here are sample records used for the prototype.</p>
+    <div class="stats-strip">
+      <div class="metric-box"><strong>{{ counts.listings }}</strong><span>Residue listings</span></div>
+      <div class="metric-box"><strong>{{ counts.farmers }}</strong><span>Farmers</span></div>
+      <div class="metric-box"><strong>{{ counts.buyers }}</strong><span>Registered buyers</span></div>
+      <div class="metric-box"><strong>₹ 2.5k</strong><span>Demo earnings</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">How it works</h2>
+    <div class="grid-4">
+      <div class="card">
+        <h3>1. List</h3>
+        <p>Farmers upload residue quantity, quality and collection details.</p>
+      </div>
+      <div class="card">
+        <h3>2. Match</h3>
+        <p>Rule-based matching checks fit, demand, net value and location.</p>
+      </div>
+      <div class="card">
+        <h3>3. Negotiate</h3>
+        <p>Buyers send offers while farmers compare transport and handling costs.</p>
+      </div>
+      <div class="card">
+        <h3>4. Deliver</h3>
+        <p>Orders move through collection, delivery and completion milestones.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: #fff;">
+  <div class="container">
+    <h2 class="section-title">Testimonials</h2>
+    <p class="section-subtitle"><strong>Sample/demo content only.</strong> These are example testimonials for the prototype.</p>
+    <div class="grid-3">
+      <div class="card">
+        <p>“We reduced crop waste and found a nearby buyer without losing time.”</p>
+        <strong>— Demo farmer, Telangana</strong>
+      </div>
+      <div class="card">
+        <p>“The matching engine helped us find suitable feedstock at a practical cost.”</p>
+        <strong>— Demo buyer</strong>
+      </div>
+      <div class="card">
+        <p>“Machinery booking coordination made collection easier for the group.”</p>
+        <strong>— Demo machinery owner</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">FAQ</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Is this a real marketplace?</h3>
+        <p>No. This is a fully working prototype with demo data and simulated transactions.</p>
+      </div>
+      <div class="card">
+        <h3>Can I list my farm waste?</h3>
+        <p>Yes. Farmers can create listings, compare offers and track orders.</p>
+      </div>
+      <div class="card">
+        <h3>Do you verify buyers?</h3>
+        <p>Verification status is explicit and is not automatic just because a business registered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

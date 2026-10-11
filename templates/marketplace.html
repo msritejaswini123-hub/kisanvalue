@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="topbar">
+      <div>
+        <p class="eyebrow">Residue marketplace</p>
+        <h1>Search and compare crop by-products</h1>
+      </div>
+      <a class="btn btn-primary" href="{{ url_for('create_listing') }}">Create listing</a>
+    </div>
+    <form method="get" class="card" style="margin-bottom: 24px;">
+      <div class="form-grid">
+        <label>Search<input type="text" name="q" value="{{ search }}" placeholder="Material, district or crop" /></label>
+        <label>Category<select name="material">
+          <option value="">All materials</option>
+          {% for category in categories %}
+            <option value="{{ category.name }}" {% if material == category.name %}selected{% endif %}>{{ category.name }}</option>
+          {% endfor %}
+        </select></label>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Apply filters</button>
+      </div>
+    </form>
+    <div class="listings-grid">
+      {% for listing in listings %}
+      <article class="listing-card">
+        <div class="badge badge-green">{{ listing.status }}</div>
+        <h3>{{ listing.material_name }}</h3>
+        <p>Crop source: {{ listing.crop_source }}</p>
+        <p>Quantity: {{ listing.quantity }} {{ listing.unit }}</p>
+        <p>Location: {{ listing.village }}, {{ listing.district }}</p>
+        <p>Asking price: ₹{{ listing.price }} {% if listing.negotiable %}(negotiable){% endif %}</p>
+        <p>Minimum order: {{ listing.min_order }} {{ listing.unit }}</p>
+        <div class="form-actions">
+          <a class="btn btn-secondary" href="{{ url_for('listing_detail', id=listing.id) }}">View details</a>
+        </div>
+      </article>
+      {% else %}
+      <div class="card"><p>No listings match the filters right now.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

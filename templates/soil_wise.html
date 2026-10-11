@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1>SoilWise</h1>
+    <p class="section-subtitle">Track soil improvement, compost use, fertilizer expenditure and seasonal notes.</p>
+    <form class="card" method="post">
+      <input type="hidden" name="_csrf" value="{{ session['csrf_token'] }}" />
+      <div class="form-grid">
+        <label>Field size<input type="text" name="field_size" /></label>
+        <label>Crop grown<input type="text" name="crop_grown" /></label>
+        <label>Fertilizer expenditure<input type="number" name="fertilizer_expenditure" /></label>
+        <label>Soil test results<input type="text" name="soil_test_results" /></label>
+        <label>Compost/biochar applied<input type="text" name="compost_or_biochar" /></label>
+        <label>Application dates<input type="text" name="application_dates" /></label>
+      </div>
+      <label>Notes<textarea name="notes">Record observed soil condition, crop response and notes from the season.</textarea></label>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">Save record</button></div>
+    </form>
+
+    <div class="card" style="margin-top: 24px;">
+      <h3>Saved field records</h3>
+      {% if records %}
+      <table class="table">
+        <thead><tr><th>Field</th><th>Crop</th><th>Fertilizer spend</th><th>Soil test</th></tr></thead>
+        <tbody>
+          {% for record in records %}
+          <tr><td>{{ record.field_size }}</td><td>{{ record.crop_grown }}</td><td>₹{{ record.fertilizer_expenditure }}</td><td>{{ record.soil_test_results }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No records yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

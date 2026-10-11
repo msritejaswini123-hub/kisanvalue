@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="form-card">
+      <h2>Register as Buyer</h2>
+      <form method="post">
+        <input type="hidden" name="_csrf" value="{{ session['csrf_token'] }}" />
+        <div class="form-grid">
+          <label>Contact person<input type="text" name="contact_person" required /></label>
+          <label>Organization name<input type="text" name="organization_name" required /></label>
+          <label>Email<input type="email" name="email" required /></label>
+          <label>Mobile number<input type="tel" name="mobile" required /></label>
+          <label>Password<input type="password" name="password" required /></label>
+          <label>Business category<select name="business_category"><option>Bioenergy and biomass power plants</option><option>Biogas and biofuel producers</option><option>Industrial plants using agricultural biomass</option><option>Paper, packaging and fibre manufacturers</option><option>Dairy farms and livestock-feed suppliers</option><option>Compost and organic fertilizer producers</option><option>Biochar manufacturers</option><option>Other agricultural residue processors</option></select></label>
+          <label>Operating location<input type="text" name="operating_location" required /></label>
+          <label>Required materials<input type="text" name="required_materials" required /></label>
+          <label>Estimated quantity required<input type="text" name="estimated_quantity" /></label>
+          <label>Procurement frequency<input type="text" name="procurement_frequency" /></label>
+          <label>Delivery or collection preference<input type="text" name="delivery_preference" /></label>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Register</button>
+          <a class="btn btn-light" href="{{ url_for('login') }}">Back to login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

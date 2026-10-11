@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="form-card">
+      <h2>Login</h2>
+      <form method="post">
+        <input type="hidden" name="_csrf" value="{{ session['csrf_token'] }}" />
+        <label>
+          Email
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" required />
+        </label>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Login</button>
+          <a class="btn btn-light" href="{{ url_for('register_farmer') }}">Create farmer account</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="form-card">
+      <h2>Create residue listing</h2>
+      <form method="post">
+        <input type="hidden" name="_csrf" value="{{ session['csrf_token'] }}" />
+        <div class="form-grid">
+          <label>Material name<input type="text" name="material_name" required /></label>
+          <label>Crop source<input type="text" name="crop_source" required /></label>
+          <label>Quantity<input type="number" name="quantity" required /></label>
+          <label>Unit<select name="unit"><option>kg</option><option>ton</option><option>quintal</option></select></label>
+          <label>Estimated moisture<input type="text" name="moisture" /></label>
+          <label>Collection option<input type="text" name="collection_option" /></label>
+          <label>Village<input type="text" name="village" required /></label>
+          <label>District<input type="text" name="district" required /></label>
+          <label>Available date<input type="date" name="available_date" required /></label>
+          <label>Asking price<input type="number" name="price" required /></label>
+          <label>Negotiable<select name="negotiable"><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label>Minimum order quantity<input type="number" name="min_order" /></label>
+          <label>Status<select name="status"><option>Listed</option><option>Paused</option></select></label>
+        </div>
+        <label>Quality or contamination notes<textarea name="quality_notes">Dry and clean residue with minimal contamination.</textarea></label>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Publish listing</button>
+          <a class="btn btn-light" href="{{ url_for('marketplace') }}">Back to marketplace</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

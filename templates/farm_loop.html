@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1>FarmLoop Planner</h1>
+    <p class="section-subtitle">Compare scenarios for residue sale, machinery rental and soil amendment reuse pathways.</p>
+    <form class="card" method="post">
+      <input type="hidden" name="_csrf" value="{{ session['csrf_token'] }}" />
+      <div class="form-grid">
+        <label>Crop grown<input type="text" name="crop_grown" /></label>
+        <label>Residue generated<input type="text" name="residue_generated" /></label>
+        <label>Approximate quantity<input type="text" name="approx_quantity" /></label>
+        <label>Local buyer availability<input type="text" name="buyer_availability" /></label>
+        <label>Need machinery<select name="needs_machinery"><option>No</option><option>Yes</option></select></label>
+        <label>Reuse pathway<select name="reuse_path"><option>Compost</option><option>Biochar</option><option>Buyer sale</option></select></label>
+      </div>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">Generate plan</button></div>
+    </form>
+
+    {% if scenario %}
+    <div class="card" style="margin-top: 24px;">
+      <h3>Scenario summary</h3>
+      <p>Crop: {{ scenario.crop }}</p>
+      <p>Residue: {{ scenario.residue }}</p>
+      <p>Quantity: {{ scenario.quantity }}</p>
+      <p>Buyer availability: {{ scenario.buyer }}</p>
+      <p>Machinery needed: {{ scenario.machinery }}</p>
+      <p>Selected reuse pathway: {{ scenario.reuse }}</p>
+      <p><strong>Estimated revenue:</strong> ₹2,500 to ₹4,500 depending on buyer and transport costs.</p>
+      <p><strong>Potential waste diversion:</strong> 70% to 90% of the generated dry residue where collection and handling are managed.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

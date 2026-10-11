@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KisanValue | {{ title if title else 'Farm Waste to Farmer Wealth' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <div class="brand">
+          <div class="brand-mark">🌿</div>
+          <div>
+            <strong>KisanValue</strong>
+            <small>Turn Farm Waste into Farmer Wealth</small>
+          </div>
+        </div>
+        <nav class="main-nav">
+          <a href="{{ url_for('home') }}">Home</a>
+          <a href="{{ url_for('marketplace') }}">Marketplace</a>
+          <a href="{{ url_for('matches') }}">Matches</a>
+          <a href="{{ url_for('harvest_pool') }}">HarvestPool</a>
+          <a href="{{ url_for('farm_share') }}">FarmShare</a>
+          <a href="{{ url_for('impact') }}">Impact</a>
+        </nav>
+        <div class="nav-actions">
+          {% if current_user %}
+            <a class="btn btn-light" href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a class="btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
+          {% else %}
+            <a class="btn btn-light" href="{{ url_for('login') }}">Login</a>
+            <a class="btn btn-primary" href="{{ url_for('register_farmer') }}">Join as Farmer</a>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="container flash-wrap">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>KisanValue</h4>
+          <p>Practical circular-economy pathways for farms, industries and soil health.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="{{ url_for('marketplace') }}">Marketplace</a></li>
+            <li><a href="{{ url_for('fodder_connect') }}">FodderConnect</a></li>
+            <li><a href="{{ url_for('soil_renew') }}">SoilRenew</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="{{ url_for('farm_loop') }}">FarmLoop Planner</a></li>
+            <li><a href="{{ url_for('soil_wise') }}">SoilWise</a></li>
+            <li><a href="{{ url_for('admin_dashboard') if current_user and current_user.role == 'admin' else url_for('home') }}">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>Sample/demo data only. No real buyer verification is implied.</span>
+      </div>
+    </footer>
+  </body>
+</html>
