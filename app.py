@@ -528,15 +528,35 @@ def get_role_label(role):
     return labels.get(role, "User")
 
 
+
 @app.route("/")
 def home():
     conn = get_db_connection()
+
     counts = {
-        "listings": conn.execute("SELECT COUNT(*) FROM residue_listings").fetchone()[0],
-        "farmers": conn.execute("SELECT COUNT(*) FROM users WHERE role = 'farmer'").fetchone()[0],
-        "buyers": conn.execute("SELECT COUNT(*) FROM users WHERE role = 'buyer'").fetchone()[0],
+        "listings": conn.execute(
+            "SELECT COUNT(*) FROM residue_listings"
+        ).fetchone()[0],
+        "farmers": conn.execute(
+            "SELECT COUNT(*) FROM users WHERE role = 'farmer'"
+        ).fetchone()[0],
+        "buyers": conn.execute(
+            "SELECT COUNT(*) FROM users WHERE role = 'buyer'"
+        ).fetchone()[0],
     }
-    return render_template("index.html", counts=counts)
+
+    listings = conn.execute(
+        "SELECT * FROM residue_listings ORDER BY id DESC LIMIT 3"
+    ).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "index.html",
+        counts=counts,
+        listings=listings
+    )
+
 
 
 @app.route("/login", methods=["GET", "POST"])
