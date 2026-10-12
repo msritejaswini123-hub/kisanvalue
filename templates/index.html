@@ -20,18 +20,33 @@
         <div class="workflow-item"><span>Farmer Earns</span></div>
       </div>
     </div>
-    <div class="hero-card">
-      <h3>Marketplace preview</h3>
-      <div class="metric-box">
-        <strong>1,000 kg</strong>
-        <span>Rice straw listed in Nizamabad</span>
-      </div>
-      <div class="stats-strip">
-        <div class="metric-box"><strong>24</strong><span>Material matches</span></div>
-        <div class="metric-box"><strong>8</strong><span>Buyer categories</span></div>
-      </div>
-    </div>
-  </div>
+    
+<div class="hero-card">
+    <h3>Marketplace preview</h3>
+
+    {% if listings %}
+        {% for listing in listings %}
+            <div class="metric-box">
+                <strong>{{ listing.material_name }}</strong>
+                <span>
+                    Quantity: {{ listing.quantity }} {{ listing.unit }}
+                </span>
+                <span>
+                    Location: {{ listing.village }}
+                </span>
+                <span>
+                    Price: ₹{{ listing.price }}
+                </span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="metric-box">
+            <strong>No listings yet</strong>
+            <span>New farmer listings will appear here.</span>
+        </div>
+    {% endif %}
+</div>
+
 </section>
 
 <section class="section">
