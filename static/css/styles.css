@@ -135,3 +135,29 @@ textarea { min-height: 110px; }
   .nav-wrap { flex-direction: column; align-items: flex-start; }
   .main-nav { width: 100%; }
 }
+
+/* Improve homepage marketplace preview readability */
+.hero-card .metric-box {
+    background: #ffffff;
+    color: #173b30;
+    border: 1px solid #dfeee5;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.hero-card .metric-box strong {
+    display: block;
+    color: #124b38;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.hero-card .metric-box span {
+    display: block;
+    color: #334b42;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
